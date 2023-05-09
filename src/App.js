@@ -1,9 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
-import Kakao from './components/map/Kakao';
+import Map from './components/map/Map';
 function App() {
   return (
-    <Kakao/>
+    <div>
+      <Map/>
+    </div>
+
   );
 }
 
