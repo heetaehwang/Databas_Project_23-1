@@ -1,17 +1,9 @@
 import './App.css';
-import Map from './components/map/Map';
-import Button from './components/ui/Button';
-import Inputbox from './components/ui/Inputbox';
+import Home from './components/pages/Home';
+
 function App() {
   return (
-    <div>
-      <div>
-        <Button/>
-        <Inputbox/>
-      </div>
-      <Map/>
-    </div>
-
+    <Home/>
   );
 }
 

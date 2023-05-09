@@ -21,8 +21,8 @@ function Map(){
 
     return (
         <div id="map" style ={{
-            width: '965px',
-            height: '500px'
+            width: '720px',
+            height: '539px'
         }}></div>
     )
 }
