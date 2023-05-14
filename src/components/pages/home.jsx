@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Button from "../ui/button";
+import Button from "../ui/Button";
 import Map from "../map/map";
-import ListWrite from "./listWrite";
+
 const Title = styled.div`
     padding: 10px;
     border: 1px solid balck;
@@ -43,12 +43,13 @@ function Home(props) {
             <Title>
                 <h1>...20Kg...</h1>
             </Title>
-            <ListWrite/>
 
             <Container>
                 <Button
-                    title="위치 찾기"
+                    id="lotation"
+                    title="헬스장 위치 찾기"
                 />
+
                 <Map/>
             </Container>
         </Wrapper>
