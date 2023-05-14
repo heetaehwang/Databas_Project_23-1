@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Button from "../ui/Button";
 import Map from "../map/map";
 
 const Title = styled.div`
@@ -45,12 +44,6 @@ function Home(props) {
             </Title>
 
             <Container>
-                <Button
-                    id="lotation"
-                    title="헬스장 위치 찾기"
-                    onClick=""
-                />
-
                 <Map/>
             </Container>
         </Wrapper>
