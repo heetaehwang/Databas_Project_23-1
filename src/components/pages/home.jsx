@@ -48,6 +48,7 @@ function Home(props) {
                 <Button
                     id="lotation"
                     title="헬스장 위치 찾기"
+                    onClick=""
                 />
 
                 <Map/>

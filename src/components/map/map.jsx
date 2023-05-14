@@ -13,36 +13,43 @@ function Map(){
         let container = document.getElementById('map');
         let options = {   
             center: new kakao.maps.LatLng(35.84577171588417, 127.13318294215267),
-            level:6
+            level:5,
+            draggable: false
+
+
         };
+        
     //헬스장 표시
     const map = new kakao.maps.Map(container, options);
-    markerdata.forEach((el)=> {
-        var healthmarker =new kakao.maps.Marker({
-            map: map,
-            position: new kakao.maps.LatLng(el.lat, el.lng),
-            title: el.title,
+
+    const findCenter=()=>{
+        markerdata.forEach((el)=> {
+            var healthmarker =new kakao.maps.Marker({
+                map: map,
+                position: new kakao.maps.LatLng(el.lat, el.lng),
+                title: el.title,
+            });
+            
+            var iwContent = el.title, // 인포윈도우에 표시할 내용
+                iwRemoveable = true;
+        
+            // 인포윈도우를 생성합니다
+            var infowindow = new kakao.maps.InfoWindow({
+                content : iwContent,
+                removable : iwRemoveable
+            });
+            
+            // 인포윈도우를 마커위에 표시합니다 
+            infowindow.open(map, healthmarker);
+            
         });
-        
-        var iwContent = el.title, // 인포윈도우에 표시할 내용
-            iwRemoveable = true;
-    
-        // 인포윈도우를 생성합니다
-        var infowindow = new kakao.maps.InfoWindow({
-            content : iwContent,
-            removable : iwRemoveable
-        });
-        
-        // 인포윈도우를 마커위에 표시합니다 
-        infowindow.open(map, healthmarker);
-        
-    });
+    }
+    findCenter();
 
 
 
 
     //내위치 찾기
-    
     const MyPosition=(locPosition, message)=> {
 
         // 마커를 생성합니다
@@ -82,7 +89,8 @@ function Map(){
                 
         });
         
-    } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+    } else {
+         // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
         
         var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
             message = 'geolocation을 사용할수 없어요..'
@@ -92,7 +100,7 @@ function Map(){
 
 
 
-    };
+};
 
 
     return (
