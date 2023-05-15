@@ -2,13 +2,22 @@ import { useEffect,useState } from "react";
 import { markerdata } from "../data/markerData";
 import Button from "../ui/Button";
 import axios from 'axios';
+import { click } from "@testing-library/user-event/dist/click";
 const {kakao} =window;
 
 function Map(){
+    const [clicked, setClicked] =useState(0);
     
+    const upClick= ()=>{
+        setClicked(clicked=>clicked+1);
+    }
+    const downClick= ()=>{
+        setClicked(clicked=>clicked-1);
+    }
+
     useEffect(() =>{
         mapscript();
-    }, [])
+    }, [])      
 
     
     //지도생성
@@ -17,13 +26,14 @@ function Map(){
         let options = {   
             center: new kakao.maps.LatLng(35.84577171588417, 127.13318294215267),
             level:5,
-            draggable: false
         };
         
         //헬스장 표시
         const map = new kakao.maps.Map(container, options);
 
-        const findCenter=()=>{
+            
+        
+        const CenterMarker=()=>{
             markerdata.forEach((el)=> {
                 var healthmarker =new kakao.maps.Marker({
                     map: map,
@@ -42,10 +52,16 @@ function Map(){
                 
                 // 인포윈도우를 마커위에 표시합니다 
                 infowindow.open(map, healthmarker);
+                if(clicked===0)
+                {
+                    kakao.maps.event.addListener(healthmarker,'click', upClick);
+                }
+
+
                 
             });
         }
-        findCenter();
+        CenterMarker();
 
 
 
@@ -111,6 +127,7 @@ function Map(){
             title="헬스장 위치 찾기"
             onClick={""}
         />
+        <p>{clicked}</p>
         <div id="map" style ={{
             width: '720px',
             height: '539px'
