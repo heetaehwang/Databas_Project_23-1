@@ -17,6 +17,9 @@ function Map(){
 
     }, // eslint-disable-next-line
     [])
+    const toggleVisibility = () => {
+        setShow(!show);
+      };
 
     let mylat;
     let mylon;
@@ -34,32 +37,32 @@ function Map(){
         const map = new kakao.maps.Map(container, options);
 
         
-        const findCenter=()=>{
-            markerdata.forEach((el)=> {
-                var healthmarker =new kakao.maps.Marker({
-                    map: map,
-                    position: new kakao.maps.LatLng(el.lat, el.lng),
-                    title: el.title,
-                });
+            const findCenter=()=>{
+                markerdata.forEach((el)=> {
+                    var healthmarker =new kakao.maps.Marker({
+                        map: map,
+                        position: new kakao.maps.LatLng(el.lat, el.lng),
+                        title: el.title,
+                    });
+                    
+                    var iwContent = el.title, // 인포윈도우에 표시할 내용
+                        iwRemoveable = true;
                 
-                var iwContent = el.title, // 인포윈도우에 표시할 내용
-                    iwRemoveable = true;
-            
-                // 인포윈도우를 생성합니다
-                var infowindow = new kakao.maps.InfoWindow({
-                    content : iwContent,
-                    removable : iwRemoveable
-                });
-                
-                // 인포윈도우를 마커위에 표시합니다 
-                infowindow.open(map, healthmarker);
-                
-                kakao.maps.event.addListener(healthmarker, 'click', ()=>{
-                    setShow(!show);
-                })
-                
-                
-        });
+                    // 인포윈도우를 생성합니다
+                    var infowindow = new kakao.maps.InfoWindow({
+                        content : iwContent,
+                        removable : iwRemoveable
+                    });
+                    
+                    // 인포윈도우를 마커위에 표시합니다 
+                    infowindow.open(map, healthmarker);
+                    
+                    kakao.maps.event.addListener(healthmarker, 'click', ()=>{
+                        toggleVisibility();
+                    })
+                    
+                    
+            });
         }
         findCenter();
     
@@ -134,7 +137,7 @@ function Map(){
             height: '539px'
         }}></div>
         <div>
-            {show ? <Modal/> : null}
+            {show &&<Modal/>}
         </div>
     </p>
     );
