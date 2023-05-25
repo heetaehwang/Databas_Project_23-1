@@ -1,10 +1,13 @@
-import { useEffect,useState } from "react";
+import { useEffect } from "react";
 import { markerdata } from "../data/markerData";
 import Button from "../ui/Button";
-import axios from 'axios';
+import CenterInfo from "./centerinfo";
 const {kakao} =window;
 
+
 function Map(){
+    let mylat;
+    let mylon;
     
     useEffect(() =>{
         mapscript();
@@ -42,11 +45,15 @@ function Map(){
                 
                 // 인포윈도우를 마커위에 표시합니다 
                 infowindow.open(map, healthmarker);
-                
-            });
+                kakao.maps.event.addListener(healthmarker, 'click', ()=>{
+                    <div id="center-info-container">
+                        <CenterInfo/>
+                    </div>
+                });
+        });
         }
         findCenter();
-
+    
 
 
 
@@ -86,6 +93,8 @@ function Map(){
                     message = '<div style="padding:5px;">현재 위치!</div>'; // 인포윈도우에 표시될 내용입니다
                 
                 // 마커와 인포윈도우를 표시합니다
+                mylat =lat;
+                mylon =lon;
                 MyPosition(locPosition, message);
                     
             });
@@ -101,21 +110,24 @@ function Map(){
 
 
 
-    };
+    }
 
 
     return (
     <p>
         <Button
-            id="lotation"
             title="헬스장 위치 찾기"
             onClick={""}
+        />
+        <Button
+            title="경로 찾기"
+            onClick={()=>{window.open(`https://map.kakao.com/link/from/내 위치,${mylat},${mylon}`)}}
         />
         <div id="map" style ={{
             width: '720px',
             height: '539px'
         }}></div>
     </p>
-    )};
-
+    );
+};
 export default Map;
