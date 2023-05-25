@@ -6,14 +6,13 @@ const {kakao} =window;
 
 
 function Map(){
-    let mylat;
-    let mylon;
     
     useEffect(() =>{
         mapscript();
     }, [])
 
-    
+    let mylat;
+    let mylon;
     //지도생성
     const mapscript =()=>{
         let container = document.getElementById('map');

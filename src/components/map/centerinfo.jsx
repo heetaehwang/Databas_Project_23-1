@@ -16,3 +16,4 @@ const CenterInfo = () => {
 };
 
 export default CenterInfo;
+
