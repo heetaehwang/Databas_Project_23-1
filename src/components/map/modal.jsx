@@ -2,7 +2,7 @@ import React from 'react';
 import { markerdata } from "../data/markerData";
 
 
-const Modal = () => {
+const Modal = (marker) => {
 
   return (
     <div>

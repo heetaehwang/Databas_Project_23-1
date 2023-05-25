@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { markerdata } from "../data/markerData";
 import Button from "../ui/Button";
 import Modal from "./modal";
@@ -9,18 +9,17 @@ const {kakao} =window;
 
 function Map(){
     //mapscript 관리
+
+    let [show, setShow] =useState(false);
+    
     useEffect(() =>{
         mapscript();
-
 
     }, // eslint-disable-next-line
     [])
 
     let mylat;
     let mylon;
-
-
-
 
     //지도생성
     const mapscript =()=>{
@@ -30,10 +29,6 @@ function Map(){
             level:5,
             draggable: false
         };
-
-
-
-
         
         //헬스장 표시
         const map = new kakao.maps.Map(container, options);
@@ -56,11 +51,14 @@ function Map(){
                     removable : iwRemoveable
                 });
                 
-
                 // 인포윈도우를 마커위에 표시합니다 
                 infowindow.open(map, healthmarker);
-
-  
+                
+                kakao.maps.event.addListener(healthmarker, 'click', ()=>{
+                    setShow(!show);
+                })
+                
+                
         });
         }
         findCenter();
@@ -136,7 +134,7 @@ function Map(){
             height: '539px'
         }}></div>
         <div>
-            <Modal/>
+            {show ? <Modal/> : null}
         </div>
     </p>
     );

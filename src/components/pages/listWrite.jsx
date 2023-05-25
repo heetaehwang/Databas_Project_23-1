@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "../ui/button";
+import Button from "../ui/Button";
 function ListWrite() {
   const [toDo, setToDo] = useState("");
   const [toDos, setToDos] = useState([]);
