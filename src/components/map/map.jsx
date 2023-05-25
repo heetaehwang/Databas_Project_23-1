@@ -1,18 +1,27 @@
 import { useEffect } from "react";
 import { markerdata } from "../data/markerData";
 import Button from "../ui/Button";
-import CenterInfo from "./centerinfo";
+import Modal from "./modal";
+
 const {kakao} =window;
 
 
+
 function Map(){
-    
+    //mapscript 관리
     useEffect(() =>{
         mapscript();
-    }, [])
+
+
+    }, // eslint-disable-next-line
+    [])
 
     let mylat;
     let mylon;
+
+
+
+
     //지도생성
     const mapscript =()=>{
         let container = document.getElementById('map');
@@ -21,10 +30,15 @@ function Map(){
             level:5,
             draggable: false
         };
+
+
+
+
         
         //헬스장 표시
         const map = new kakao.maps.Map(container, options);
 
+        
         const findCenter=()=>{
             markerdata.forEach((el)=> {
                 var healthmarker =new kakao.maps.Marker({
@@ -42,20 +56,15 @@ function Map(){
                     removable : iwRemoveable
                 });
                 
+
                 // 인포윈도우를 마커위에 표시합니다 
                 infowindow.open(map, healthmarker);
-                kakao.maps.event.addListener(healthmarker, 'click', ()=>{
-                    <div id="center-info-container">
-                        <CenterInfo/>
-                    </div>
-                });
+
+  
         });
         }
         findCenter();
     
-
-
-
         //내위치 찾기
         const MyPosition=(locPosition, message)=> {
 
@@ -126,6 +135,9 @@ function Map(){
             width: '720px',
             height: '539px'
         }}></div>
+        <div>
+            <Modal/>
+        </div>
     </p>
     );
 };

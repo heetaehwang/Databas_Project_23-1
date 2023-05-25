@@ -1,10 +1,12 @@
 import React from 'react';
 import { markerdata } from "../data/markerData";
 
-const CenterInfo = () => {
+
+const Modal = () => {
+
   return (
     <div>
-      {markerdata.foreach((marker) => (
+      {markerdata.map((marker) => (
         <div key={marker.title}>
           <h3>{marker.title}</h3>
           <p>Latitude: {marker.lat}</p>
@@ -15,5 +17,5 @@ const CenterInfo = () => {
   );
 };
 
-export default CenterInfo;
+export default Modal;
 
