@@ -29,9 +29,8 @@ function Map(){
         let container = document.getElementById('map');
         let options = {   
             center: new kakao.maps.LatLng(35.84577171588417, 127.13318294215267),
-            level:5,
-            draggable: false
-        };
+            level:5
+            };
         
         //헬스장 표시
         const map = new kakao.maps.Map(container, options);
