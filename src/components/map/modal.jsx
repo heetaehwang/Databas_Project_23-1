@@ -50,21 +50,19 @@ const Modal = () => {
 
     <div>
         <h1>
-        공대7호관 1km이내의 헬스장 (거리순)!
+        내 기준 1km이내의 헬스장 ({data.length}개)!
         </h1>
-      <ul>
+      <ol>
         {data.map((item) => (
           <li key={item.id}>
             이름: {item.id}<br />
-            위도: {item.lat}<br />
-            경도: {item.lon}<br />
             거리: {item.distance.toFixed(2)} km
             <br/>
             <br/>
 
           </li>
         ))}
-      </ul>
+      </ol>
     </div>
   );
 };

@@ -26,7 +26,50 @@ const getDistanceFromLatLonInKm=(lat1, lng1, lat2, lng2) => {
 const DBtest = () => {
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
+
+  const [Mystate, setMyState] = useState({
+    center: {
+      lat: 33.450701,
+      lng: 126.570667,
+    },
+    errMsg: null,
+    isLoading: true,
+  })
+
+
   useEffect(() => {
+    //find my position with GeoLocation
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setMyState((prev) => ({
+            ...prev,
+            center: {
+              lat: position.coords.latitude, // 위도
+              lng: position.coords.longitude, // 경도
+            },
+            isLoading: false,
+          }))
+        },
+        (err) => {
+          setMyState((prev) => ({
+            ...prev,
+            errMsg: err.message,
+            isLoading: false,
+          }))
+        }
+      )
+    } else {
+      // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+      setMyState((prev) => ({
+        ...prev,
+        errMsg: "geolocation을 사용할수 없어요..",
+        isLoading: false,
+      }))
+    }
+
+
     firestore.collection('health').get().then((snapshot) => {
       const dataArray = [];
 
@@ -35,7 +78,7 @@ const DBtest = () => {
         const lat = doc.data().위도;
         const lon = doc.data().경도;
         // 내 위치 임의값 입력
-        const distance = getDistanceFromLatLonInKm(lat, lon, 35.844105927118875, 127.13256534257418); // 거리 계산
+        const distance = getDistanceFromLatLonInKm(lat, lon, Mystate.center.lat, Mystate.center.lng); // 거리 계산
 
         if (distance < 1) {
           dataArray.push({ id: documentId, lat, lon, distance });
@@ -43,8 +86,10 @@ const DBtest = () => {
       });
 
       setData(dataArray);
+
+      
     });
-  }, []);
+  }, [Mystate.center]);
   
   return (
     <div>
@@ -62,6 +107,15 @@ const DBtest = () => {
         level={5}
         draggable={true}
       >
+
+        {!Mystate.isLoading && (
+            <MapMarker position={Mystate.center}>
+              <div style={{ padding: "5px", color: "#ff0000" }}>
+                {Mystate.errMsg ? Mystate.errMsg : "내 위치!"}
+              </div>
+            </MapMarker>
+          )}
+
         {data.map((item) => (
           show && (
             <MapMarker
