@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { firestore } from "../../firebase";
 
 // 함수 정의
-function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
-  function deg2rad(deg) {
+const getDistanceFromLatLonInKm=(lat1, lng1, lat2, lng2) => {
+  const deg2rad=(deg) => {
     return deg * (Math.PI / 180);
   }
 

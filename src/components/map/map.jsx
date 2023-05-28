@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { markerdata } from "../data/markerData";
 import Button from "../ui/Button";
-import Modal from "./modal";
-import { firestore } from "../../firebase";
 
 const {kakao} =window;
+let mylat;
+let mylon;
 //두 point 거리 계산
 const getDistanceFromLatLonInKm =(lat1, lng1, lat2, lng2) => {
     const deg2rad = (deg) => {
@@ -29,7 +29,7 @@ const BringData = (targetlat, targetlon) => {
     const [data, setData] = useState([]);
   
     useEffect(() => {
-      firestore.collection('health').get().then((snapshot) => {
+      markerdata.collection('health').get().then((snapshot) => {
         const dataArray = [];
   
         snapshot.forEach((doc) => {
@@ -46,31 +46,15 @@ const BringData = (targetlat, targetlon) => {
   
         setData(dataArray);
       });
-    }, []);
+    }, [targetlat,targetlon]);
     return data;
 }
+
 const Map =() => {
-    //mapscript 관리
     useEffect(() =>{
-        mapscript();
 
-    }, // eslint-disable-next-line
-    [])
-
-    //마커클릭시 이벤트
-    // let [show, setShow] =useState(false);
-
-    // const toggleVisibility = () => {
-    //     setShow(!show);
-    //   };
-
-    let mylat;
-    let mylon;
-
-    //지도생성
-    const mapscript =()=>{
-        let container = document.getElementById('map');
-        let options = {   
+        const container = document.getElementById('map');
+        const options = {   
             center: new kakao.maps.LatLng(35.84577171588417, 127.13318294215267),
             level:5,
             draggable: false
@@ -157,7 +141,16 @@ const Map =() => {
         }
 
         findCenter();
-    }
+    }, 
+    [])
+
+
+  
+
+    //지도생성
+
+
+    
 
 
     return (
@@ -174,9 +167,7 @@ const Map =() => {
             width: '720px',
             height: '539px'
         }}></div>
-        <div>
-            <Modal/>
-        </div>
+
     </div>
     );
 };

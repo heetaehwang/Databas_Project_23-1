@@ -1,7 +1,6 @@
 import React from "react";
 // import styled from "styled-components";
 import Map from "../map/map";
-import ListWrite from "./listWrite";
 
 // const Title = styled.div`
 //     padding: 10px;
@@ -40,15 +39,9 @@ function Home(props) {
     return (
 
         <div>
-            <div>
                 <h1>...20Kg...</h1>
-            </div>
-            <div>
-                <ListWrite/>
-            </div>
-            <div>
+
                 <Map/>
-            </div>
         </div>
     );
 }
