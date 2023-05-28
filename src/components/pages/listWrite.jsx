@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { firestore } from "../../firebase";
+import { useNavigate } from "react-router-dom";
+import Button from "../ui/Button";
 
 const ListWrite=() =>{
+  const navigate =useNavigate();
+
   const [inputText, setInputText] = useState("");
 
   const handleInputChange = (event) => {
@@ -19,23 +23,29 @@ const ListWrite=() =>{
       text: inputText,
     })
     .then(() => {
-      console.log("Text saved successfully to Firebase!");
+      alert("Saved!");
       setInputText("");
     })
     .catch((error) => {
-      console.error("Error saving text to Firebase: ", error);
+      alert("Error detected!");
     });
   };
 
   return (
     <form onSubmit={handleFormSubmit}>
+
       <input
         type="text"
         value={inputText}
         onChange={handleInputChange}
-        placeholder="Enter your text..."
+        placeholder="Enter your work..."
       />
-      <button type="submit">Save</button>
+      <Button title="Submit" />
+      <Button title="Go Back..." 
+              onClick={()=>{
+              navigate("/")
+      }}/>
+    
     </form>
   );
 }
