@@ -41,6 +41,8 @@ const Modal = () => {
       });
 
       setData(dataArray);
+      console.log(dataArray);
+
     });
   }, []);
 
