@@ -1,10 +1,11 @@
 import React from "react";
-import DBtest from "./components/map/DBtest";
+import Home from "./components/pages/home";
+import ListWrite from "./components/pages/listWrite";
 function App(){
 
   return (
   <div>
-    <DBtest/>
+    <ListWrite/>
   </div>
   );
   

@@ -1,7 +1,7 @@
 import React from "react";
 // import styled from "styled-components";
 import Map from "../map/map";
-
+import ListShow from "../pages/listShow"
 // const Title = styled.div`
 //     padding: 10px;
 //     border: 1px solid balck;
@@ -40,7 +40,7 @@ function Home(props) {
 
         <div>
                 <h1>...20Kg...</h1>
-
+                <ListShow/>
                 <Map/>
         </div>
     );

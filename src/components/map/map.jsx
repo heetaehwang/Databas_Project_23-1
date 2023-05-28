@@ -3,10 +3,9 @@ import { firestore } from "../../firebase";
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import Button from '../ui/Button';
 import Modal from './modal';
-let mylat,mylon;
 
-const getDistanceFromLatLonInKm=(lat1, lng1, lat2, lng2) => {
-  const deg2rad=(deg) => {
+const getDistanceFromLatLonInKm = (lat1, lng1, lat2, lng2) => {
+  const deg2rad = (deg) => {
     return deg * (Math.PI / 180);
   }
 
@@ -23,7 +22,8 @@ const getDistanceFromLatLonInKm=(lat1, lng1, lat2, lng2) => {
   var distance = R * c; // 거리 (단위: km)
   return distance;
 }
-const Map = () => {
+
+const DBtest = () => {
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
 
@@ -34,12 +34,29 @@ const Map = () => {
     },
     errMsg: null,
     isLoading: true,
-  })
+  });
 
+  const fetchData = () => {
+    firestore.collection('health').get().then((snapshot) => {
+      const dataArray = [];
+
+      snapshot.forEach((doc) => {
+        const documentId = doc.id;
+        const lat = doc.data().위도;
+        const lon = doc.data().경도;
+        const distance = getDistanceFromLatLonInKm(lat, lon, Mystate.center.lat, Mystate.center.lng);
+        
+        if (distance < 1) {
+          dataArray.push({ id: documentId, lat, lon, distance });
+        }
+      });
+
+      setData(dataArray);
+    });
+  };
 
   useEffect(() => {
     //find my position with GeoLocation
-
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -50,71 +67,54 @@ const Map = () => {
               lng: position.coords.longitude, // 경도
             },
             isLoading: false,
-          }))
+          }));
         },
         (err) => {
           setMyState((prev) => ({
             ...prev,
             errMsg: err.message,
             isLoading: false,
-          }))
+          }));
         }
-      )
+      );
     } else {
       // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
       setMyState((prev) => ({
         ...prev,
         errMsg: "geolocation을 사용할수 없어요..",
         isLoading: false,
-      }))
+      }));
     }
+  }, []);
 
-
-    firestore.collection('health').get().then((snapshot) => {
-      const dataArray = [];
-
-      snapshot.forEach((doc) => {
-        const documentId = doc.id;
-        const lat = doc.data().위도;
-        const lon = doc.data().경도;
-        // 내 위치 임의값 입력
-        const distance = getDistanceFromLatLonInKm(lat, lon, Mystate.center.lat, Mystate.center.lng); // 거리 계산
-
-        if (distance < 1) {
-          dataArray.push({ id: documentId, lat, lon, distance });
-        }
-      });
-
-      setData(dataArray);
-
-      
-    });
-  }, [Mystate.center]);
-  
   return (
     <div>
       <Button
-            title="헬스장 위치 찾기"
-            onClick={()=>setShow(true)}
+        title="헬스장 위치 찾기"
+        onClick={() => {
+          setShow(true);
+          fetchData();
+        }}
       />
       <Button
-            title="경로 찾기"
-            onClick={()=>{window.open(`https://map.kakao.com/link/from/내 위치,${mylat},${mylon}`)}}
+        title="경로 찾기"
+        onClick={() => {
+          window.open(`https://map.kakao.com/link/from/내 위치,${Mystate.center.lat},${Mystate.center.lng}`);
+        }}
       />
       <Map
-        style={{width: '720px', height: '539px' }}
+        style={{ width: '720px', height: '539px' }}
         center={{ lat: 35.84577171588417, lng: 127.13318294215267 }}
         level={5}
         draggable={true}
       >
-
         {!Mystate.isLoading && (
-            <MapMarker position={Mystate.center}>
-              <div style={{ padding: "5px", color: "#ff0000" }}>
-                {Mystate.errMsg ? Mystate.errMsg : "내 위치!"}
-              </div>
-            </MapMarker>
-          )}
+          <MapMarker position={Mystate.center}>
+            <div style={{ padding: "5px", color: "#ff0000" }}>
+              {Mystate.errMsg ? Mystate.errMsg : "내 위치!"}
+            </div>
+          </MapMarker>
+        )}
 
         {data.map((item) => (
           show && (
@@ -130,9 +130,9 @@ const Map = () => {
           )
         ))}
       </Map>
-      {show &&<Modal/>}
+      {show && <Modal />}
     </div>
   );
 };
 
-export default Map;
+export default DBtest;

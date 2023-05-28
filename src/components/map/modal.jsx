@@ -34,9 +34,9 @@ const Modal = () => {
         const lon = doc.data().경도;
         //내 위치 임의값 입력
         const distance = getDistanceFromLatLonInKm(lat, lon, 35.844105927118875, 127.13256534257418); // 거리 계산
-
+        const phonenumber = doc.data().전화번호;
         if (distance < 1) {
-          dataArray.push({ id: documentId, lat, lon, distance });
+          dataArray.push({ id: documentId, lat, lon, distance, phonenumber});
         }
       });
       dataArray.sort((a, b) => a.distance - b.distance);
@@ -56,7 +56,8 @@ const Modal = () => {
         {data.map((item) => (
           <li key={item.id}>
             이름: {item.id}<br />
-            거리: {item.distance.toFixed(2)} km
+            거리: {item.distance.toFixed(2)} km<br/>
+            번호: {item.phonenumber}<br/>
             <br/>
             <br/>
 
