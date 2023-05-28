@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { firestore } from "../../firebase";
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
-
+import Button from '../ui/Button';
+import Modal from './modal';
+let mylat,mylon;
 
 const getDistanceFromLatLonInKm=(lat1, lng1, lat2, lng2) => {
   const deg2rad=(deg) => {
@@ -23,7 +25,7 @@ const getDistanceFromLatLonInKm=(lat1, lng1, lat2, lng2) => {
 }
 const DBtest = () => {
   const [data, setData] = useState([]);
-
+  const [show, setShow] = useState(false);
   useEffect(() => {
     firestore.collection('health').get().then((snapshot) => {
       const dataArray = [];
@@ -46,6 +48,14 @@ const DBtest = () => {
   
   return (
     <div>
+      <Button
+            title="헬스장 위치 찾기"
+            onClick={()=>setShow(true)}
+      />
+      <Button
+            title="경로 찾기"
+            onClick={()=>{window.open(`https://map.kakao.com/link/from/내 위치,${mylat},${mylon}`)}}
+      />
       <Map
         style={{width: '720px', height: '539px' }}
         center={{ lat: 35.84577171588417, lng: 127.13318294215267 }}
@@ -53,12 +63,20 @@ const DBtest = () => {
         draggable={true}
       >
         {data.map((item) => (
-          <MapMarker
-            key={item.id}
-            position={{ lat: item.lat, lng: item.lon }}
-          />
+          show && (
+            <MapMarker
+              key={item.id}
+              position={{ lat: item.lat, lng: item.lon }}
+              clickable={true}
+            >
+              <div style={{ padding: "5px", color: "#000" }}>
+                {item.id}
+              </div>
+            </MapMarker>
+          )
         ))}
       </Map>
+      {show &&<Modal/>}
     </div>
   );
 };

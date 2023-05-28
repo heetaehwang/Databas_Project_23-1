@@ -39,9 +39,9 @@ const Modal = () => {
           dataArray.push({ id: documentId, lat, lon, distance });
         }
       });
+      dataArray.sort((a, b) => a.distance - b.distance);
 
       setData(dataArray);
-      console.log(dataArray);
 
     });
   }, []);
@@ -50,7 +50,7 @@ const Modal = () => {
 
     <div>
         <h1>
-        공대7호관 1km이내의 헬스장!
+        공대7호관 1km이내의 헬스장 (거리순)!
         </h1>
       <ul>
         {data.map((item) => (
