@@ -2,6 +2,28 @@ import React, { useEffect, useState } from "react";
 import { firestore } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import Button from "../ui/Button";
+import styled from "styled-components";
+
+const Container = styled.div`
+  text-align: center;
+`;
+
+const Title = styled.h1`
+  margin-bottom: 20px;
+`;
+
+const ButtonContainer = styled.div`
+  margin-bottom: 20px;
+`;
+
+const List = styled.ol`
+  list-style: none;
+  padding: 0;
+`;
+
+const ListItem = styled.li`
+  margin-bottom: 10px;
+`;
 
 function ListShow() {
   const navigate = useNavigate();
@@ -13,14 +35,14 @@ function ListShow() {
   }, []);
 
   const fetchData = async () => {
-    const collectionRef = firestore.collection("ToDo"); // 변경해야 할 부분: 데이터를 가져올 Firestore 컬렉션 이름
+    const collectionRef = firestore.collection("ToDo");
     const snapshot = await collectionRef.get();
     const dataList = snapshot.docs.map((doc) => doc.data());
     setDataList(dataList);
   };
 
   const handleDeleteAll = () => {
-    const collectionRef = firestore.collection("ToDo"); // 변경해야 할 부분: 삭제할 Firestore 컬렉션 이름
+    const collectionRef = firestore.collection("ToDo");
     collectionRef
       .get()
       .then((snapshot) => {
@@ -35,26 +57,30 @@ function ListShow() {
         setDataList([]);
       })
       .catch((error) => {
-        alert("Error deleting documents ");
+        alert("Error deleting documents");
       });
   };
 
   return (
-    <div>
-      <h1>Today's Workout ({dataList.length})</h1>
+    <Container>
+      <Title>Today's Workout ({dataList.length})</Title>
 
-      <Button title= "작성하기" 
-              onClick={()=>{
-              navigate("/list-write");
-      }}/>
-      <Button title="비우기" onClick={handleDeleteAll}/>
-      <ol>
+      <ButtonContainer>
+        <Button
+          title="작성하기"
+          onClick={() => {
+            navigate("/list-write");
+          }}
+        />
+        <Button title="비우기" onClick={handleDeleteAll} />
+      </ButtonContainer>
+
+      <List>
         {dataList.map((data, index) => (
-          <li key={index}>{data.text}</li> // 변경해야 할 부분: 리스트 항목을 표시할 방식으로 수정
+          <ListItem key={index}>{data.text}</ListItem>
         ))}
-      </ol>
-
-    </div>
+      </List>
+    </Container>
   );
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Map from "../map/map";
+import DBtest from "../map/map";
 import ListShow from "../pages/listShow"
 
 const Wrapper = styled.div`
@@ -29,7 +29,7 @@ function Home(props) {
         <Wrapper>
             <Container>
                 <ListShow/>
-                <Map/>
+                <DBtest/>
             </Container>
         </Wrapper>
 
