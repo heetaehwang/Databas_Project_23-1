@@ -86,7 +86,7 @@ const DBtest = () => {
     }
   }, []);
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
       <Button
         title="헬스장 위치 찾기"
         onClick={() => {
@@ -101,7 +101,7 @@ const DBtest = () => {
         }}
       />
       <Map
-        style={{ width: '720px', height: '539px' }}
+        style={{ width: '720px', height: '539px', boxShadow :'0 0 10px rgba(0, 0, 0, 0.5)'}}
         center={{ lat: 35.84577171588417, lng: 127.13318294215267 }}
         level={5}
         draggable={true}

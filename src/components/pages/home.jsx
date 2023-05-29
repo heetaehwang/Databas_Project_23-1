@@ -29,6 +29,7 @@ function Home(props) {
         <Wrapper>
             <Container>
                 <ListShow/>
+                <br/>
                 <DBtest/>
             </Container>
         </Wrapper>
