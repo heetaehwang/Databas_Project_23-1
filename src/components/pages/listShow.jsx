@@ -25,6 +25,16 @@ const ListItem = styled.li`
   margin-bottom: 10px;
 `;
 
+const StyledListShowContainer = styled.div`
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 680px;
+  margin: 0 auto;
+  text-align: center;
+`;
+
 function ListShow() {
   const navigate = useNavigate();
 
@@ -62,25 +72,27 @@ function ListShow() {
   };
 
   return (
-    <Container>
-      <Title>Today's Workout ({dataList.length})</Title>
+    <StyledListShowContainer>
+      <Container>
+        <Title>Today's Workout ({dataList.length})</Title>
 
-      <ButtonContainer>
-        <Button
-          title="작성하기"
-          onClick={() => {
-            navigate("/list-write");
-          }}
-        />
-        <Button title="비우기" onClick={handleDeleteAll} />
-      </ButtonContainer>
+        <ButtonContainer>
+          <Button
+            title="작성하기"
+            onClick={() => {
+              navigate("/list-write");
+            }}
+          />
+          <Button title="비우기" onClick={handleDeleteAll} />
+        </ButtonContainer>
 
-      <List>
-        {dataList.map((data, index) => (
-          <ListItem key={index}>{data.text}</ListItem>
-        ))}
-      </List>
-    </Container>
+        <List>
+          {dataList.map((data, index) => (
+            <ListItem key={index}>{data.text}</ListItem>
+          ))}
+        </List>
+      </Container>
+    </StyledListShowContainer>
   );
 }
 

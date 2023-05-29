@@ -22,7 +22,6 @@ const getDistanceFromLatLonInKm = (lat1, lng1, lat2, lng2) => {
   var distance = R * c; // 거리 (단위: km)
   return distance;
 }
-
 const DBtest = () => {
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
@@ -45,7 +44,7 @@ const DBtest = () => {
         const lat = doc.data().위도;
         const lon = doc.data().경도;
         const distance = getDistanceFromLatLonInKm(lat, lon, Mystate.center.lat, Mystate.center.lng);
-        
+
         if (distance < 1) {
           dataArray.push({ id: documentId, lat, lon, distance });
         }
@@ -86,7 +85,6 @@ const DBtest = () => {
       }));
     }
   }, []);
-
   return (
     <div>
       <Button
@@ -130,7 +128,7 @@ const DBtest = () => {
           )
         ))}
       </Map>
-      {show && <Modal />}
+      {show && <Modal targetlan={Mystate.center.lat} targetlon={Mystate.center.lng} />}
     </div>
   );
 };
