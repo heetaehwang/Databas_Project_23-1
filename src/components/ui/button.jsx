@@ -10,7 +10,7 @@ const StyledButton = styled.button`
   padding: 10px 30px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
   &:hover {
     background-color: #c5d1db;
