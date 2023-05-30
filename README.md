@@ -1,72 +1,39 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 # Databas_Project_23-1
-# Databas_Project_23-1
+공공데이터를 이용한 React + Firebase_헬스장 위치 탐색 사이트
+
+# 프로젝트 소개
+이 프로젝트는 23년도 '데이터베이스' 과목 프로젝트로, 
+
+전라북도 전주시_체력단련장업 (https://www.data.go.kr/data/15112497/fileData.do) 공공데이터를 이용하여 자신의 현재 위치 기준 1km이내의 헬스장의 위치와 정보를 찾아주는 사이트 입니다.
+
+# 개발 기간
+23.05.08일 ~ 23.05.30일
+---
+
+## 멤버구성
+
+황희태: ToDo list (CRD), 카카오맵 API를 활용하여 지도 및 마커 생성, 자신의 위치 기준 1km 이내 헬스장 탐색, CSS, 기말발표 
+
+홍건하: firebase 생성, 공공데이터 입력, PPT, 중간발표
+
+## 개발환경
+
+- React  9.5.0, 
+
+- Firebase
+
+- IDE: Visual Studio Code
+
+---
+# 주요기능
+
+To Do List
+
+- DB 입출력 및 삭제
+
+헬스장 위치 탐색
+
+- DB로 부터 데이터 읽어오기
+- 불러온 데이터로부터 자신의 위치 기준 1km이내의 헬스장 탐색
+- KakaoMap API 활용하여 지도 위에 헬스장 위치 표시
+

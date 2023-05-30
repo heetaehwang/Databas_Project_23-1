@@ -13,7 +13,7 @@ function App(){
 
   return (
     <BrowserRouter>               
-      <MainTitleText>...20Kg...</MainTitleText>
+      <MainTitleText>+++20Kg+++</MainTitleText>
       <Routes>
         <Route index element ={<Home/>}/>
         <Route path="list-write" element = {<ListWrite/>}/>
