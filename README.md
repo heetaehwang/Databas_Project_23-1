@@ -14,13 +14,13 @@
 
 황희태: ToDo list (CRD), 카카오맵 API를 활용하여 지도 및 마커 생성, 자신의 위치 기준 1km 이내 헬스장 탐색, CSS, 기말발표 
 
-홍건하: firebase 생성, 공공데이터 입력, PPT, 중간발표
+홍건하: 공공데이터 입력, PPT, 중간발표
 
 
 
 #### :gear: 개발환경
 
-- React  9.5.0, 
+- React  9.5.0              
 
 - Firebase
 
