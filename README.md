@@ -32,7 +32,7 @@ To Do List
 
 - DB 입출력 및 삭제
 
-헬스장 위치 탐색 [-상세보기-](https://github.com/hwangheetae/Database_Project_23-1/wiki/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%B3%84-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C
+헬스장 위치 탐색 [-상세보기-](https://github.com/hwangheetae/Database_Project_23-1/wiki/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%B3%84-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C-(map.jsx))
 
 - DB로 부터 데이터 읽어오기
 - 불러온 데이터로부터 자신의 위치 기준 1km이내의 헬스장 탐색
