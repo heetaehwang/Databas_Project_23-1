@@ -41,3 +41,6 @@ To Do List [-상세보기-](https://github.com/hwangheetae/Database_Project_23-1
 #### :movie_camera: 영상
 
 [![Video Label](http://img.youtube.com/vi/eqrS1ALHp04/0.jpg)](https://youtu.be/eqrS1ALHp04)
+
+
+## 23.06.23 프로젝트 종료
